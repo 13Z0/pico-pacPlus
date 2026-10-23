@@ -20,6 +20,15 @@ Release notes are below, newest first. [Binaries for every board configuration a
 > Upgrading from an earlier version only means flashing the new `.uf2`. When updating to v0.6 the settings return to their defaults once; after that your screen mode, colours and other preferences carry over again.
 
 
+# v0.6.1
+
+## What's new
+
+- **PicoNES PCB with SNES controller ports.** PCB design v2.8, designed by John Edgar Park ([@johnedgarpark](https://twitter.com/johnedgarpark)), has two SNES controller ports, so original SNES controllers plug in without an adapter cable. The Gerber file `pico_nesPCB_v2.8_SNES_PORTS.zip` is attached below. See [Custom PCBs](https://github.com/PicoPlus-devel/pico-pacPlus#custom-pcbs) in the readme.
+- All PCB designs, with parts lists and pictures, are now described in the [PCB README](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md), and the Gerber files of the PicoNES, PicoNES Mini and PicoNES Micro are attached to the release.
+
+The binaries are the same as in v0.6.
+
 # v0.6
 
 After updating, all settings return to their defaults once.
@@ -242,6 +251,10 @@ Adafruit DVI Breakout + MicroSD card breakout, or the custom PCB.
 | Pico W | [picoPacPlus_AdafruitDVISD_pico_w_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico_w_arm.uf2) |
 | Pico 2 / Pimoroni Pico Plus 2 | [picoPacPlus_AdafruitDVISD_pico2_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico2_arm.uf2) |
 
+PCB with NES controller ports: [pico_nesPCB_v2.6.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/pico_nesPCB_v2.6.zip)
+
+PCB with SNES controller ports: [pico_nesPCB_v2.8_SNES_PORTS.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/pico_nesPCB_v2.8_SNES_PORTS.zip)
+
 ### PCB Waveshare RP2040-Zero / RP2350-Zero (PCB required)
 
 | Board | Binary |
@@ -249,9 +262,13 @@ Adafruit DVI Breakout + MicroSD card breakout, or the custom PCB.
 | Waveshare RP2040-Zero | [picoPacPlus_WaveShareRP2040ZeroWithPCB_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2040ZeroWithPCB_arm.uf2) |
 | Waveshare RP2350-Zero | [picoPacPlus_WaveShareRP2350ZeroWithPCB_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2350ZeroWithPCB_arm.uf2) |
 
+PCB: [Gerber_PicoNES_Mini_PCB_v2.0.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/Gerber_PicoNES_Mini_PCB_v2.0.zip)
+
 ### PCB Waveshare RP2350-USBA (PCB required)
 
 [Binary](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShare2350USBA_arm_piousb.uf2)
+
+PCB: [Gerber_PicoNES_Micro_v1.2.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/Gerber_PicoNES_Micro_v1.2.zip)
 
 ### Pimoroni Pico DV Demo Base
 
@@ -296,6 +313,12 @@ There is no Pico 2 W binary for this board.
 
 ### Other downloads
 
-- Metadata: [pacPlusMetadata.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/pacPlusMetadata.zip)
+- Metadata: [O2EMetadata.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/O2EMetadata.zip)
 
 Extract the zip file to the root folder of the SD card. Select a game in the menu and press START to show more information and box art. Works for most official released games. The screensaver shows floating random cover art.
+
+- PCB Gerber files. Upload the zip file unchanged to a PCB manufacturer. See the [PCB README](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md) for parts lists and build instructions.
+  - PicoNES v2.6, NES controller ports: [pico_nesPCB_v2.6.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/pico_nesPCB_v2.6.zip)
+  - PicoNES v2.8, SNES controller ports: [pico_nesPCB_v2.8_SNES_PORTS.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/pico_nesPCB_v2.8_SNES_PORTS.zip)
+  - PicoNES Mini (Waveshare RP2040-Zero / RP2350-Zero): [Gerber_PicoNES_Mini_PCB_v2.0.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/Gerber_PicoNES_Mini_PCB_v2.0.zip)
+  - PicoNES Micro (Waveshare RP2350-USB-A): [Gerber_PicoNES_Micro_v1.2.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/Gerber_PicoNES_Micro_v1.2.zip)

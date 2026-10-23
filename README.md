@@ -48,7 +48,7 @@ The emulator runs on both RP2040 and RP2350 boards:
 - **RP2040 boards (Pico 1 / Pico W / Waveshare RP2040 boards / etc.)** — Fully supported. Because there is no PSRAM, the selected ROM is first written to flash on launch, which triggers a reboot; startup takes a few seconds. Some titles exhibit minor visual glitches.
 - **RP2350 boards (Pico 2 / Pico 2 W / Waveshare RP2350 boards / Adafruit Metro RP2350 / Adafruit Fruit Jam / etc.)** — Recommended. On boards equipped with PSRAM the ROM is loaded straight into PSRAM and started immediately, without the reboot-and-write step.
 
-For board-by-board wiring, supported display modes, PCB designs, 3D-printed cases, and which UF2 file to flash, refer to the [pico-infonesPlus documentation](https://github.com/PicoPlus-devel/pico-infonesPlus#setup). The set of supported boards and their pinouts is identical between the two projects — only the firmware (`.uf2` file) differs.
+For board-by-board wiring, supported display modes, and which UF2 file to flash, refer to the [pico-infonesPlus documentation](https://github.com/PicoPlus-devel/pico-infonesPlus#setup). The PCB designs and their 3D-printed cases are described under [Custom PCBs](#custom-pcbs) below. The set of supported boards and their pinouts is identical between the two projects — only the firmware (`.uf2` file) differs.
 
 This includes the [Olimex RP2040-PICO-PC](https://www.olimex.com/Products/MicroPython/PICO/RP2040-PICO-PC/) with a Raspberry Pi Pico 2, which plays sound through HDMI and its audio jack at the same time; see [Olimex RP2040-PICO-PC](https://github.com/PicoPlus-devel/pico-infonesPlus#olimex-rp2040-pico-pc).
 
@@ -63,6 +63,83 @@ Some boards support up to 8 MB of PSRAM. When PSRAM is detected the emulator use
 | [Pimoroni Pico Plus 2](https://shop.pimoroni.com/products/pimoroni-pico-plus-2) | Yes — pre-installed |
 | [Adafruit Fruit Jam](https://www.adafruit.com/product/6200) | Yes — pre-installed |
 | [Olimex RP2040-PICO-PC](https://www.olimex.com/Products/MicroPython/PICO/RP2040-PICO-PC/) with a Pico 2 | No — optional (chip select on GPIO 8) |
+
+***
+
+## Custom PCBs
+
+Four community PCB designs turn a supported board and its breakouts into a small console. Nothing changes in the firmware: flash the binary for that configuration. Parts lists, ordering instructions, assembly notes, the pin assignment, the 3D-printed cases and the older design versions are described in the [PCB README](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md). The Gerber files are attached to every [release](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest) of this project.
+
+| Design | Picture | Controller ports | Board it carries | Build | Designed by |
+| --- | --- | --- | --- | --- | --- |
+| [PicoNES v2.6](#picones-pcb) | <img src="https://raw.githubusercontent.com/PicoPlus-devel/pico_shared/main/PCB/images/picones_v2.6_assembled.jpg" width="240" alt="PicoNES v2.6 with a Pimoroni Pico Plus 2"><br><sub>See note</sub> | 2 × NES | Pico, Pico W, Pico 2, Pico 2 W or Pimoroni Pico Plus 2 | `-c2` | [John Edgar Park](https://twitter.com/johnedgarpark) |
+| [PicoNES v2.8](#picones-pcb) | <img src="https://raw.githubusercontent.com/PicoPlus-devel/pico_shared/main/PCB/images/picones_v2.8s_assembled.jpg" width="240" alt="PicoNES v2.8 with SNES controller ports"><br><sub>See note</sub> | 2 × SNES | Pico, Pico W, Pico 2, Pico 2 W or Pimoroni Pico Plus 2 | `-c2` | [John Edgar Park](https://twitter.com/johnedgarpark) |
+| [PicoNES Mini](#picones-mini-pcb) | <img src="https://github.com/user-attachments/assets/13933b1d-af00-402e-a0a0-8456de4a82da" width="240" alt="PicoNES Mini"> | 2 × NES | Waveshare RP2040-Zero or RP2350-Zero | `-c6` | [Gavin Knight](https://github.com/DynaMight1124) |
+| [PicoNES Micro](#picones-micro-pcb) | <img src="https://github.com/user-attachments/assets/59c8a31b-dc3e-47b0-8ffb-89e1eab2a75b" width="240" alt="PicoNES Micro"> | None, USB controller only | Waveshare RP2350-USB-A | `-c9` | [Gavin Knight](https://github.com/DynaMight1124) |
+
+> [!NOTE]
+> The PicoNES v2.6 and v2.8 are shown with a Pimoroni Pico Plus 2. A Raspberry Pi Pico, Pico W, Pico 2 or Pico 2 W can also be fitted.
+
+> [!NOTE]
+> Sellers on AliExpress have copied the PicoNES design and sell ready-made boards. For questions about those, contact the seller.
+
+### PicoNES PCB
+
+The PicoNES PCB carries the microcontroller board, the DVI and microSD breakouts and two controller ports. It comes in two versions, which differ only in the controller ports: **v2.6** with NES controller ports and **v2.8** with SNES controller ports.
+
+A Pico, Pico W, Pico 2 or Pico 2 W can be soldered flat onto the PCB or mounted on male pin headers. A [Pimoroni Pico Plus 2](https://shop.pimoroni.com/products/pimoroni-pico-plus-2?variant=42092668289107) must be mounted on pin headers, because the SP/CE connector on its back prevents it from lying flat. Optional female socket headers, soldered into the PCB, let the board be plugged in and swapped without desoldering. An RP2040 Pico works, but see [Hardware requirements](#hardware-requirements) for what it gives up.
+
+Controllers on the two GPIO controller ports:
+
+- **v2.8:** original SNES controllers plug in directly.
+- **v2.6:** NES controllers plug in directly. An original NES controller has no Button3; see [Button mapping](#button-mapping). A SNES controller works as well, but needs a [SNES-to-NES adapter cable](https://github.com/PicoPlus-devel/pico-snesPlus/blob/main/snestonescontroller.md), one per port.
+
+Two controllers give a two-player setup. A USB controller for player 1 and a controller in either port for player 2 works as well.
+
+The parts lists and assembly notes are in the PCB README: [PicoNES v2.6](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md#picones-v26-nes-controller-ports) and [PicoNES v2.8](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md#picones-v28-snes-controller-ports).
+
+| NES controller ports (v2.6) | SNES controller ports (v2.8) |
+| --------------------------- | ---------------------------- |
+| <img src="https://raw.githubusercontent.com/PicoPlus-devel/pico_shared/main/PCB/images/picones_v2.6_assembled.jpg" width="400" alt="PicoNES v2.6 with NES controller ports"> | <img src="https://raw.githubusercontent.com/PicoPlus-devel/pico_shared/main/PCB/images/picones_v2.8s_assembled.jpg" width="400" alt="PicoNES v2.8 with SNES controller ports"> |
+
+#### Which binary to flash
+
+- Pico 2, Pico 2 W **and** Pimoroni Pico Plus 2 — `picoPacPlus_AdafruitDVISD_pico2_arm.uf2`
+- Original Pico — `picoPacPlus_AdafruitDVISD_pico_arm.uf2`
+- Pico W — `picoPacPlus_AdafruitDVISD_pico_w_arm.uf2`
+
+The Pimoroni Pico Plus 2 needs no separate build. Its PSRAM is detected at boot, so a game starts as soon as it is selected, without the flash-and-reboot step; see [PSRAM](#psram).
+
+#### 3D printed case
+
+Gavin Knight ([DynaMight1124](https://github.com/DynaMight1124)) designed an NES-like case for the v2.6 PCB: [thingiverse.com/thing:6689537](https://www.thingiverse.com/thing:6689537). It does not fit the v2.8 PCB. Two top covers are available, one with a button that presses the BOOTSEL button for firmware updates and one without. All parts are shown in the [PCB README](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md#3d-printed-case). For questions about the case, please contact the designer on the Thingiverse page.
+
+> [!IMPORTANT]
+> If the Pico is mounted with male headers, download the **latest** top cover. Headers raise the Pico, and only the newest cover leaves room for the USB cable — the older ones assume a Pico soldered flat onto the PCB.
+
+| Top cover | Base |
+| --------- | ---- |
+| <img src="https://github.com/user-attachments/assets/c6205db3-580e-41e9-83e4-66c9534c6519" width="380" alt="Top cover"> | <img src="https://github.com/user-attachments/assets/256bbd1b-b6db-485d-a59c-fd22fd017887" width="380" alt="Base with the PCB fitted"> |
+
+### PicoNES Mini PCB
+
+The PicoNES Mini, by Gavin Knight ([DynaMight1124](https://github.com/DynaMight1124)), is a smaller PCB for a Waveshare RP2350-Zero or RP2040-Zero, with two NES controller ports. It uses cheaper components that are harder to solder, and is recommended only for builders with good soldering skills.
+
+Flash `picoPacPlus_WaveShareRP2350ZeroWithPCB_arm.uf2` for the RP2350-Zero, or `picoPacPlus_WaveShareRP2040ZeroWithPCB_arm.uf2` for the RP2040-Zero. The RP2350-Zero is the better choice — see [Hardware requirements](#hardware-requirements).
+
+The parts list and build instructions are in the [Instructables guide, step 1](https://www.instructables.com/PicoNES-RaspberryPi-Pico-Based-NES-Emulator/#step1). See also [PicoNES Mini](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md#picones-mini-waveshare-rp2040-zero--rp2350-zero) in the PCB README. The 3D-printed case is available on [Thingiverse](https://www.thingiverse.com/thing:7041536).
+
+<img src="https://github.com/user-attachments/assets/732384bd-062d-43ca-97cb-a16a39607c41" width="480" alt="PicoNES Mini in its 3D-printed case">
+
+### PicoNES Micro PCB
+
+The PicoNES Micro, by Gavin Knight ([DynaMight1124](https://github.com/DynaMight1124)), is a very small PCB for the Waveshare RP2350-USB-A, for one player with a USB controller. It uses 0603-size SMD components and requires micro-soldering skills.
+
+Flash `picoPacPlus_WaveShare2350USBA_arm_piousb.uf2`. The game controller plugs into the USB-A port; the USB-C port is for power and for flashing the firmware.
+
+The parts list, build instructions and case are in the [Instructables guide, steps 2 and 3](https://www.instructables.com/PicoNES-RaspberryPi-Pico-Based-NES-Emulator/#step2). See also [PicoNES Micro](https://github.com/PicoPlus-devel/pico_shared/blob/main/PCB/README.md#picones-micro-waveshare-rp2350-usb-a) in the PCB README.
+
+<img src="https://github.com/user-attachments/assets/1d6051f2-1393-40e1-aad0-e39ffb7717a0" width="480" alt="PicoNES Micro in its 3D-printed case">
 
 ***
 
