@@ -20,6 +20,12 @@ Release notes are below, newest first. [Binaries for every board configuration a
 > Upgrading from an earlier version only means flashing the new `.uf2`. When updating to v0.6 the settings return to their defaults once; after that your screen mode, colours and other preferences carry over again.
 
 
+# v0.6.2
+
+## Fixes
+
+- **USB controllers and keyboards on the Adafruit Fruit Jam and other boards with PIO-USB are now found at every start.** On boards with an older RP2350 chip they were often not detected.
+
 # v0.6.1
 
 ## What's new
